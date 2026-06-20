@@ -17,6 +17,9 @@
       devShells.default = pkgs.mkShell {
         nativeBuildInputs = with pkgs; [cmake pkg-config];
         buildInputs = with pkgs; [
+          onnx
+          onnxruntime
+	  opencv
         ];
       };
     });
