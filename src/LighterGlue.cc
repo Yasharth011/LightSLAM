@@ -1,6 +1,5 @@
 #include "lighterglue.h"
 #include "OnnxHelper.h"
-#include "Timer.h"
 
 Lighterglue::Lighterglue(const std::string &modelFile) {
     // Convert the modelFile path to onnx compatible path
