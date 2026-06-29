@@ -18,6 +18,7 @@
 #include "utils.h"
 
 const double IMU_EPS = 1e-4; 
+const double IMU_G_VALUE = 9.81;
 
 struct ImuData {
   double timestamp;

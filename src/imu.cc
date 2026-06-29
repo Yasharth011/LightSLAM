@@ -300,7 +300,7 @@ void Preinteration::Predict(const Eigen::Matrix4d& Twb0, const Eigen::Vector3d& 
   if(Valid()){
     Eigen::Matrix3d Rwb0 = Twb0.block<3, 3>(0, 0);
     Eigen::Vector3d twb0 = Twb0.block<3, 1>(0, 3);
-    const Eigen::Vector3d g(0, 0, -Camera::IMU_G_VALUE);
+    const Eigen::Vector3d g(0, 0, -IMU_G_VALUE);
 
     Twb1 = Eigen::Matrix4d::Identity();
     Twb1.block<3, 3>(0, 0) = NormalizeRotation(Rwb0 * GetUpdatedDeltaRotation());
