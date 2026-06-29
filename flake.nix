@@ -21,6 +21,7 @@
           onnxruntime
 	  opencv
 	  eigen
+	  boost
         ];
       };
     });
