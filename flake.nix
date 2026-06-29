@@ -20,6 +20,7 @@
           onnx
           onnxruntime
 	  opencv
+	  eigen
         ];
       };
     });
