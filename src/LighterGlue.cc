@@ -1,4 +1,4 @@
-#include "lighterglue.h"
+#include "LighterGlue.h"
 #include "OnnxHelper.h"
 
 Lighterglue::Lighterglue(const std::string &modelFile) {
