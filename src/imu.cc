@@ -2,7 +2,6 @@
 #include <Eigen/Geometry>
 
 #include "imu.h"
-#include "camera.h"
 
 void Hat(Eigen::Matrix3d& m, const Eigen::Vector3d& v){
   m << 0, -v[2], v[1], v[2], 0, -v[0], -v[1], v[0], 0;
@@ -159,7 +158,7 @@ void Preinteration::Propagate(double dt, const Eigen::Vector3d &acc_m, const Eig
   dV = dV + dR*acc*dt;
 
   // A and B are used to compute covariance
-  Matrix9d A;
+  Eigen::Matrix<double, 9, 9> A;
   A.setIdentity();
   Eigen::Matrix<double, 9, 6> B;
   B.setZero();

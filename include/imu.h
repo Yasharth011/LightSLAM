@@ -1,9 +1,6 @@
 #ifndef IMU_H_
 #define IMU_H_
 
-#include <istream>
-#include <map>
-#include <string>
 #include <vector>
 
 #include <Eigen/Core>
@@ -13,8 +10,6 @@
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/serialization/map.hpp>
-
-#include "utils.h"
 
 const double IMU_EPS = 1e-4; 
 const double IMU_G_VALUE = 9.81;
@@ -80,7 +75,7 @@ public:
   Eigen::Matrix3d dR;
   Eigen::Vector3d dP, dV;
   Eigen::Matrix3d JRg, JVg, JVa, JPg, JPa;
-  Matrix15d Cov;
+  Eigen::Matrix<double, 15, 15> Cov;
 
   std::vector<double> dt_list;
   std::vector<Eigen::Vector3d> gyr_list;
