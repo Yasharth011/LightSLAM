@@ -6,7 +6,7 @@
 #include "XFeat.h"
 
 int main(int argc, char **argv) {
-  // 1. Parse arguments (Fixed missing semicolon inside argument keys)
+  // Parse arguments (Fixed missing semicolon inside argument keys)
   const std::string argKeys =
       "{model1 | ../model/xfeat_640x640.onnx | model file path}"
       "{img1 | ../data/1.png | the first image file path}"
@@ -19,35 +19,31 @@ int main(int argc, char **argv) {
   auto imgFile2 = parser.get<std::string>("img2");
   auto model2File = parser.get<std::string>("model2");
 
-  // Fixed typo: modelFile -> model1File
   std::cout << "model file 1: " << model1File << std::endl;
   std::cout << "model file 2: " << model2File << std::endl;
   std::cout << "image file 1: " << imgFile1 << std::endl;
   std::cout << "image file 2: " << imgFile2 << std::endl;
 
-  // 2. Instantiate with correct header class capitalization (Lighterglue)
   std::cout << "creating XFeat...\n";
   XFeat xfeat(model1File);
   std::cout << "creating LighterGlue...\n";
   Lighterglue lighterglue(model2File);
 
-  // 3. Read input images
   std::cout << "reading images...\n";
   cv::Mat img1 = cv::imread(imgFile1, cv::IMREAD_GRAYSCALE);
   cv::Mat img2 = cv::imread(imgFile2, cv::IMREAD_GRAYSCALE);
 
-  // Fixed logic bug: img2_size needs to read from img2, not img1!
   cv::Size img1_size = img1.size();
   cv::Size img2_size = img2.size();
 
-  // 4. Extract features
+  // Extract features
   std::cout << "detecting features ...\n";
   std::vector<cv::KeyPoint> keys1, keys2;
   cv::Mat descs1, descs2;
   xfeat.DetectAndCompute(img1, keys1, descs1, 2048);
   xfeat.DetectAndCompute(img2, keys2, descs2, 2048);
 
-  // 5. Visualize keypoints
+  // Visualize keypoints
   cv::Mat imgColor1, imgColor2;
   cv::cvtColor(img1, imgColor1, cv::COLOR_GRAY2BGR);
   cv::cvtColor(img2, imgColor2, cv::COLOR_GRAY2BGR);
@@ -64,17 +60,17 @@ int main(int argc, char **argv) {
   cv::waitKey(
       1); // Set to 1 ms so the windows draw without blocking code execution
 
-  // 6. Match descriptors using variable object instance 'lighterglue'
+  // Match descriptors using variable object instance 'lighterglue'
   std::cout << "matching ...\n";
   std::vector<cv::DMatch> matches;
   lighterglue.Match(keys1, descs1, img1_size, keys2, descs2, img2_size,
                     matches);
 
-  // 7. Render matching results
+  // Render matching results
   cv::Mat imgMatches;
   cv::drawMatches(imgColor1, keys1, imgColor2, keys2, matches, imgMatches);
   cv::imshow("matches", imgMatches);
-  cv::waitKey(0); // Block here until a key is pressed to close the app
+  cv::waitKey(0);
 
   return 0;
 }
